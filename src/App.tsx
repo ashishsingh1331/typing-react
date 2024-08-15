@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import Child from "./Components/Child";
-import Button from "./Components/Button";
+import { useRef } from "react";
 
 export default function App() {
-  const [value, setValue] = useState<number[]>();
-  return (
-    <h1>
-      <Button outline={true}>HI i am button</Button>
-      <input type="text" value={value} onChange={(e) => setValue([1, 2, 3])} />
-    </h1>
-  );
+  // Type useRef carefully, pass null as default value
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  inputRef.current?.focus();
+  return <input ref={inputRef} />;
 }
