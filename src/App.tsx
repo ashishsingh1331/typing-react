@@ -1,38 +1,18 @@
-import { useReducer } from "react";
-
-type State = {
-  count: number;
-};
-
-type Action =
-  | {
-      type: "INCREMENT";
-      increaseBy: number;
-    }
-  | { type: "DECREMENT"; decreaseBy: number };
-
-function reducer(state: State, action: Action) {
-  switch (action.type) {
-    case "INCREMENT":
-      return { ...state, count: state.count + action.increaseBy };
-    case "DECREMENT":
-      return { ...state, count: state.count - action.decreaseBy };
-    default:
-      throw new Error("sdfas");
-  }
-}
+import List from "./List";
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
   return (
-    <div>
-      <button onClick={() => dispatch({ type: "DECREMENT", decreaseBy: 2 })}>
-        -
-      </button>
-      {state.count}
-      <button onClick={() => dispatch({ type: "INCREMENT", increaseBy: 1 })}>
-        +
-      </button>
-    </div>
+    <List<{
+      id: number;
+      name: string;
+      age?: number;
+    }>
+      items={[
+        { id: 1, name: "Kyle" },
+        { id: 2, name: "Sally" },
+      ]}
+      getKey={(item) => item.id}
+      renderItem={(item) => <div>{item.name}</div>}
+    />
   );
 }
